@@ -11,6 +11,12 @@ const TeamHeader = ({ player = { player: {} } }) => (
           defaultMessage="Player"
         />
       </th>
+      <th>
+        <FormattedMessage
+          id="resultDetails.teamStats.header.level"
+          defaultMessage="Level"
+        />
+      </th>
       {player.player.udemae ? (
         <th>
           <FormattedMessage
@@ -60,7 +66,12 @@ const PlayerRow = ({ player }) => {
           player.player.nickname
         )}
       </td>
-
+      <td>
+        {player.player.player_rank}
+        {player.player.star_rank != null && player.player.star_rank > 0
+          ? `\u2605${player.player.star_rank}`
+          : null}
+      </td>
       {player.player.udemae ? <td>{`${player.player.udemae.name}`}</td> : null}
       <td style={{ textAlign: 'center', background: 'darkgrey' }}>
         <Image
@@ -104,6 +115,7 @@ const TeamStatTable = ({ result, team }) => {
           </th>
           <th />
           {team[0].player.udemae ? <th /> : null}
+          <td />
           <td>
             {team.reduce((sum, player) => sum + player.game_paint_point, 0)}
           </td>
